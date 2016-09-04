@@ -23,7 +23,7 @@ void		env_init(t_env *new, char *argv)
 	new->posx = 200;
 	new->posy = 200;
 	new->size = 10;
-	new->inc = 2;
+	new->inc = 1;
 	new->f_len = 0;
 	new->f_height = 0;
 	read_file(new, argv);

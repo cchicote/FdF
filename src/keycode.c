@@ -61,8 +61,9 @@ void		size(int keycode, t_env *e)
 {
 	if (keycode == 65451)
 		e->size++;
-	else if (keycode == 65453 && e->size > 10)
+	else if (keycode == 65453 && e->size > 2)
 		e->size--;
+	ft_putnbrendl(e->size);
 }
 
 void		divide(int keycode, t_env *e)
@@ -71,7 +72,6 @@ void		divide(int keycode, t_env *e)
 		e->inc++;
 	else if (keycode == 44 && e->inc > 1)
 		e->inc--;
-
 }
 
 void		treat_keycode(int keycode, t_env *e)
