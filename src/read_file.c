@@ -32,7 +32,7 @@ int			line_len(char *line)
 	return (c);
 }
 
-t_val		*put_values(t_val *v, int i, char *line)
+void		put_values(t_env *e, int i, char *line)
 {
 	int		x;
 	int		y;
@@ -45,7 +45,7 @@ t_val		*put_values(t_val *v, int i, char *line)
 	{
 		while(line[x + n] == '-' || ft_isalnum(line[x + n]) == 1)
 			n++;
-		v->tab[i][y] = ft_atoi(ft_strsub(line, x, n));
+		e->tab[i][y] = ft_atoi(ft_strsub(line, x, n));
 		n = 0;
 		y++;
 		while ((line[x] <= '9' && line[x] >= '0') || line[x] == '-') // C'est ici que ca marchait pas pour les nombres negatifs
@@ -53,10 +53,9 @@ t_val		*put_values(t_val *v, int i, char *line)
 		while (line[x] == ' ' || line[x] == '\n')
 			x++;
 	}
-	return (v);
 }
 
-t_val		*read_file(t_val *v, char *file)
+void		read_file(t_env *e, char *file)
 {
 	int		fd;
 	char	*line;
@@ -64,15 +63,14 @@ t_val		*read_file(t_val *v, char *file)
 
 	i = 0;
 	fd = open(file, O_RDONLY);
-	v->tab = (int**)ft_memalloc(sizeof(int*) * 500);
+	e->tab = (int**)ft_memalloc(sizeof(int*) * 500);
 	while (get_next_line(fd, &line) > 0)
 	{
-		v->tab[i] = (int*)ft_memalloc(sizeof(int) * (line_len(line) + 1));
-		put_values(v, i, line);
-		v->f_len = line_len(line);
+		e->tab[i] = (int*)ft_memalloc(sizeof(int) * (line_len(line) + 1));
+		put_values(e, i, line);
+		e->f_len = line_len(line);
 		i++;
-		v->f_height++;
+		e->f_height++;
 	}
 	close(fd);
-	return (v);
 }

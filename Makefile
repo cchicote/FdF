@@ -29,6 +29,7 @@ SRC = main.c \
 		read_file.c \
 		draw_line.c \
 		draw_grid.c \
+		trace.c		\
 
 SRCO = $(patsubst %.c, %.o,$(addprefix $(PATH_SRC), $(SRC)))
 

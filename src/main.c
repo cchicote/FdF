@@ -12,54 +12,49 @@
 
 #include "../includes/fdf.h"
 
-t_env		*env_init(t_env *new)
+void		env_init(t_env *new, char *argv)
 {
-	if ((new = (t_env*)ft_memalloc(sizeof(t_env))) == NULL)
-		return (NULL);
 	new->mlx = mlx_init();
-	new->win = mlx_new_window(new->mlx, 1001, 1001, "mlx 42");
+	new->win = mlx_new_window(new->mlx, WINX, WINY, "mlx 42");
+	new->img = mlx_new_image(new->mlx, WINX, WINY);
+	new->data = mlx_get_data_addr(new->img, &(new->bpp), &(new->sl), &(new->endian));
 	new->key = 0;
 	new->posv = 200;
 	new->posh = 200;
-	return (new);
-}
-
-t_val		*val_init(t_val *new)
-{
-	if ((new = (t_val*)ft_memalloc(sizeof(t_val))) == NULL)
-		return (NULL);
 	new->x = 0;
 	new->y = 0;
 	new->f_len = 0;
 	new->f_height = 0;
-	return (new);
+	read_file(new, argv);
 }
 
-t_draw		*draw_init(t_draw *new)
+void		my_pixel_put(t_env *e, int x, int y, int color)
 {
-	if ((new = (t_draw*)ft_memalloc(sizeof(t_draw))) == NULL)
-		return (NULL);
-	ft_bzero(new, sizeof(t_draw));
-	return (new);
+	unsigned int	biscolor;
+
+	biscolor = mlx_get_color_value(e->mlx, color);
+	if (x < WINX && y < WINY && x > 0 && y > 0)
+	{
+		e->data[y * e->sl + x * e->bpp / 8] = (biscolor  & 0x0000ff);  //on va chercher dans biscolor la valeur binaire du Bleu et on la met direct dans e->data
+		e->data[y * e->sl + x * e->bpp / 8 + 1] = (biscolor & 0x00ff00) >> 8;  //on va chercher dans biscolor la valeur binaire du Vert et on la met direct dans e->data
+		e->data[y * e->sl + x * e->bpp / 8 + 2] = (biscolor & 0xff0000) >> 16;  //on va chercher dans biscolor la valeur binaire du Rouge et on la met direct dans e->data
+	}
+	// les couleurs sont mises dans DATA au bon endroit (x, y)
 }
 
 int			main(int argc, char **argv)
 {
-	t_env *e = NULL;
-	t_val *v = NULL;
-	t_draw *d = NULL;
+	t_env	e;
 
 	if (argc != 2)
 	{
 		ft_putendl("Usage : ./fdf fichier");
 		return (0);
 	}
-	if (((d = draw_init(d)) == NULL) || ((e = env_init(e)) == NULL)
-	|| ((v = val_init(v)) == NULL))
-		return (0);
-	read_file(v, argv[1]);
-	draw_grid(d, e, v);
-	// mlx_key_hook(e->win, get_keycode, e->mlx);
-	mlx_loop(e->mlx);
+	env_init(&e, argv[1]);
+	my_pixel_put(&e, 20, 20, 0xFFFFFF);
+	my_pixel_put(&e, 10, 10, 0xFFFFFF);
+	mlx_put_image_to_window(e.mlx, e.win, e.img, 0, 0);
+	mlx_loop(e.mlx);
 	return (0);
 }

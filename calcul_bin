@@ -1,0 +1,21 @@
+10010 = 18
+le premier 1 a gauche = 1 * 2^4 = 16
+le second 1 = 1 * 2^1 = 2
+On additionne le tout = 2 + 16 = 18
+
+On multiplie le chiffre par 2^laposition   (2 parce que c'est du binaire)
+
+
+
+
+
+110001 = 1 + 16 + 32 = 49
+Il faut voir ca de cette facon : 
+32 16 8 4 2 1
+ 1  1 1 1 1 1
+
+Et grace a cette methode (en haut) on peut compter avec n'importe quelle base
+10010
+1 * 16^4 + 1 * 16^1 = 65552
+Ca c'est de l'hexadecimal
+

@@ -23,46 +23,39 @@
 # define PURPLE 0x9932CC
 # define YELLOW 0xFFFF00
 # define GREEN 0x008000
+# define WINX 500
+# define WINY 500
 
 typedef		struct	s_env
 {
 	void	*win;
 	void	*mlx;
+	void	*img;
+	char	*data;
+	int		bpp;
+	int		sl;
+	int		endian;
 	int		key;
 	int		posv;
 	int		posh;
-}					t_env;
-
-typedef		struct	s_val
-{
 	int		x;
 	int		y;
 	int		**tab;
 	int		f_len;
 	int		f_height;
-}					t_val;
-
-typedef		struct	s_draw
-{
-	int		x1;
-	int		y1;
-	int		x2;
-	int		y2;
-}					t_draw;
+}					t_env;
 
 int			main(int argc, char **argv);
-t_env		*env_init(t_env *new);
-t_val		*val_init(t_val *new);
-t_draw		*draw_init(t_draw *new);
+void		env_init(t_env *new, char *argv);
 int			my_key_funct(int keycode, t_env *fdf);
 int			my_mouse_funct(int mousecode, int x, int y, t_env *fdf);
 int			line_len(char *line);
-t_val		*read_file(t_val *v, char *file);
-t_val		*put_values(t_val *v, int i, char *line);
-void		line(t_draw *d, t_env *e);
-void		vertical(t_draw *d, t_env *e);
-void		draw_grid(t_draw *d, t_env *e, t_val *v);
-int			get_keycode(int keycode, t_env *e, t_draw *d, t_val *v);
-int			treat_keycode(t_env *e);
+void		read_file(t_env *e, char *file);
+void		put_values(t_env *e, int i, char *line);
+// void		line(t_draw *d, t_env *e);
+// void		vertical(t_draw *d, t_env *e);
+// void		draw_grid(t_draw *d, t_env *e, t_val *v);
+// int			get_keycode(int keycode, t_env *e, t_draw *d, t_val *v);
+// int			treat_keycode(t_env *e);
 
 #endif
