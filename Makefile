@@ -29,7 +29,11 @@ SRC = main.c \
 		read_file.c \
 		draw_line.c \
 		draw_grid.c \
-		trace.c		\
+		trace.c \
+		oct_1_2.c \
+		oct_3_4.c \
+		oct_5_6.c \
+		oct_7_8.c \
 
 SRCO = $(patsubst %.c, %.o,$(addprefix $(PATH_SRC), $(SRC)))
 

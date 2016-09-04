@@ -21,8 +21,6 @@ void		env_init(t_env *new, char *argv)
 	new->key = 0;
 	new->posv = 200;
 	new->posh = 200;
-	new->x = 0;
-	new->y = 0;
 	new->f_len = 0;
 	new->f_height = 0;
 	read_file(new, argv);
@@ -42,6 +40,30 @@ void		my_pixel_put(t_env *e, int x, int y, int color)
 	// les couleurs sont mises dans DATA au bon endroit (x, y)
 }
 
+void		gros_cercle_sa_mere(t_env *e)
+{
+	e->x1 = 100;
+	e->x2 = 100;
+	e->y1 = 100;
+	e->y2 = 100;
+	while (e->y2 != 200)
+	{
+		e->x2 = 100;
+		while (e->x2 != 200)
+		{
+			e->x2++;
+			if (e->x2 % 10 == 0)
+				draw_1(e, 0xFF0000);
+			else
+				draw_1(e, 0xFFFFFF);
+		}
+		e->y2++;
+	}
+	draw_1(e, 0xFFFFFF);
+	mlx_put_image_to_window(e->mlx, e->win, e->img, 0, 0);
+	mlx_loop(e->mlx);
+}
+
 int			main(int argc, char **argv)
 {
 	t_env	e;
@@ -52,9 +74,6 @@ int			main(int argc, char **argv)
 		return (0);
 	}
 	env_init(&e, argv[1]);
-	my_pixel_put(&e, 20, 20, 0xFFFFFF);
-	my_pixel_put(&e, 10, 10, 0xFFFFFF);
-	mlx_put_image_to_window(e.mlx, e.win, e.img, 0, 0);
-	mlx_loop(e.mlx);
+	gros_cercle_sa_mere(&e);
 	return (0);
 }

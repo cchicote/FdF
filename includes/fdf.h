@@ -23,8 +23,8 @@
 # define PURPLE 0x9932CC
 # define YELLOW 0xFFFF00
 # define GREEN 0x008000
-# define WINX 500
-# define WINY 500
+# define WINX 1000
+# define WINY 1000
 
 typedef		struct	s_env
 {
@@ -38,8 +38,10 @@ typedef		struct	s_env
 	int		key;
 	int		posv;
 	int		posh;
-	int		x;
-	int		y;
+	int		x1;
+	int		y1;
+	int		x2;
+	int		y2;
 	int		**tab;
 	int		f_len;
 	int		f_height;
@@ -52,10 +54,32 @@ int			my_mouse_funct(int mousecode, int x, int y, t_env *fdf);
 int			line_len(char *line);
 void		read_file(t_env *e, char *file);
 void		put_values(t_env *e, int i, char *line);
+void		my_pixel_put(t_env *e, int x, int y, int color);
 // void		line(t_draw *d, t_env *e);
 // void		vertical(t_draw *d, t_env *e);
 // void		draw_grid(t_draw *d, t_env *e, t_val *v);
 // int			get_keycode(int keycode, t_env *e, t_draw *d, t_val *v);
 // int			treat_keycode(t_env *e);
+
+/*
+** DRAW
+*/
+
+void		draw_1(t_env *e, int color);
+void		draw_2(t_env *e, int dx, int dy, int color);
+void		draw_3(t_env *e, int dx, int dy, int color);
+
+/*
+** OCTANTS
+*/
+
+void		oct_1(t_env *e, int dx, int dy, int color);
+void		oct_2(t_env *e, int dx, int dy, int color);
+void		oct_3(t_env *e, int dx, int dy, int color);
+void		oct_4(t_env *e, int dx, int dy, int color);
+void		oct_5(t_env *e, int dx, int dy, int color);
+void		oct_6(t_env *e, int dx, int dy, int color);
+void		oct_7(t_env *e, int dx, int dy, int color);
+void		oct_8(t_env *e, int dx, int dy, int color);
 
 #endif
