@@ -34,6 +34,8 @@ SRC = main.c \
 		oct_3_4.c \
 		oct_5_6.c \
 		oct_7_8.c \
+		keycode.c \
+		input_color.c \
 
 SRCO = $(patsubst %.c, %.o,$(addprefix $(PATH_SRC), $(SRC)))
 

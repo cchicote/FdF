@@ -28,18 +28,7 @@ void		draw_1(t_env *e, int color)
 	else
 	{
 		if ((dy = e->y2 - e->y1) != 0)
-		{
-			if (dy > 0)
-			{
-				while (e->y1++ != e->y2)
-					my_pixel_put(e, e->x1, e->y1, color);
-			}
-			else
-			{
-				while (e->y1-- != e->y2)
-					my_pixel_put(e, e->x1, e->y1, color);
-			}
-		}
+			draw_4(e, dy, color);
 	}
 }
 
@@ -91,6 +80,20 @@ void		draw_3(t_env *e, int dx, int dy, int color)
 	else
 	{
 		while (e->x1-- != e->x2)
+			my_pixel_put(e, e->x1, e->y1, color);
+	}
+}
+
+void		draw_4(t_env *e, int dy, int color)
+{
+	if (dy > 0)
+	{
+		while (e->y1++ != e->y2)
+			my_pixel_put(e, e->x1, e->y1, color);
+	}
+	else
+	{
+		while (e->y1-- != e->y2)
 			my_pixel_put(e, e->x1, e->y1, color);
 	}
 }

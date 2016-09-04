@@ -18,9 +18,12 @@ void		env_init(t_env *new, char *argv)
 	new->win = mlx_new_window(new->mlx, WINX, WINY, "mlx 42");
 	new->img = mlx_new_image(new->mlx, WINX, WINY);
 	new->data = mlx_get_data_addr(new->img, &(new->bpp), &(new->sl), &(new->endian));
+	new->color = 0xFFFFFF;
 	new->key = 0;
-	new->posv = 200;
-	new->posh = 200;
+	new->posx = 200;
+	new->posy = 200;
+	new->size = 10;
+	new->inc = 2;
 	new->f_len = 0;
 	new->f_height = 0;
 	read_file(new, argv);
@@ -42,27 +45,41 @@ void		my_pixel_put(t_env *e, int x, int y, int color)
 
 void		gros_cercle_sa_mere(t_env *e)
 {
-	e->x1 = 100;
+	e->x1 = 10;
+	e->y1 = 10;
 	e->x2 = 100;
-	e->y1 = 100;
-	e->y2 = 100;
-	while (e->y2 != 200)
-	{
-		e->x2 = 100;
-		while (e->x2 != 200)
-		{
-			e->x2++;
-			if (e->x2 % 10 == 0)
-				draw_1(e, 0xFF0000);
-			else
-				draw_1(e, 0xFFFFFF);
-		}
-		e->y2++;
-	}
+	e->y2 = 10;
 	draw_1(e, 0xFFFFFF);
-	mlx_put_image_to_window(e->mlx, e->win, e->img, 0, 0);
-	mlx_loop(e->mlx);
 }
+
+void		print_file(t_env *e)
+{
+	int i;
+	int j;
+
+	i = -1;
+	while (++i < e->f_height)
+	{
+		j = -1;
+		while (++j < e->f_len)
+		{
+			ft_putnbr(e->tab[i][j]);
+			if (e->tab[i][j] >= 10 || e->tab[i][j] < 0)
+				ft_putchar(' ');
+			else
+				ft_putstr("  ");
+
+		}
+		ft_putchar('\n');
+	}
+}
+
+void			clear(t_env *e)
+{
+	mlx_destroy_image(e->mlx, e->img);
+	mlx_new_image(e->mlx, WINX, WINY);
+}
+
 
 int			main(int argc, char **argv)
 {
@@ -74,6 +91,10 @@ int			main(int argc, char **argv)
 		return (0);
 	}
 	env_init(&e, argv[1]);
-	gros_cercle_sa_mere(&e);
+	print_file(&e);
+	// draw_grid(&e);
+	mlx_key_hook(e.win, manage_key, &e);
+	mlx_loop(e.mlx);
+	// gros_cercle_sa_mere(&e);
 	return (0);
 }
