@@ -53,12 +53,12 @@ typedef		struct	s_env
 }					t_env;
 
 int			main(int argc, char **argv);
-void		env_init(t_env *new, char *argv);
+int			env_init(t_env *new, char *argv);
 int			my_key_funct(int keycode, t_env *e);
 int			my_mouse_funct(int mousecode, int x, int y, t_env *fdf);
 int			line_len(char *line);
-void		read_file(t_env *e, char *file);
-void		put_values(t_env *e, int i, char *line);
+int			read_file(t_env *e, char *file);
+int			put_values(t_env *e, int i, char *line);
 void		my_pixel_put(t_env *e, int x, int y, int color);
 // void		line(t_draw *d, t_env *e);
 // void		vertical(t_draw *d, t_env *e);

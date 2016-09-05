@@ -1,11 +1,74 @@
-21
-9
--10 -9 -8 -7 -6 -5 -4 -3 -2 -1 0  1  2  3  4  5  6  7  8  9  10 
--10 -9 -8 -7 -6 -5 -4 -3 -2 -1 0  1  2  3  4  5  6  7  8  9  10 
--10 -9 -8 -7 -6 -5 -4 -3 -2 -1 0  1  2  3  4  5  6  7  8  9  10 
--10 -9 -8 -7 -6 -5 -4 -3 -2 -1 0  1  2  3  4  5  6  7  8  9  10 
--10 -9 -8 -7 -6 -5 -4 -3 -2 -1 0  1  2  3  4  5  6  7  8  9  10 
--10 -9 -8 -7 -6 -5 -4 -3 -2 -1 0  1  2  3  4  5  6  7  8  9  10 
--10 -9 -8 -7 -6 -5 -4 -3 -2 -1 0  1  2  3  4  5  6  7  8  9  10 
--10 -9 -8 -7 -6 -5 -4 -3 -2 -1 0  1  2  3  4  5  6  7  8  9  10 
--10 -9 -8 -7 -6 -5 -4 -3 -2 -1 0  1  2  3  4  5  6  7  8  9  10 
+#include "libft/libft.h"
+#include "fdf.h"
+
+void	draw_case_one(t_coord *point, t_env *e)
+{
+	int	x;
+
+	x = point->x1;
+	while (x <= point->x2)
+	{
+		mlx_pixel_put(e->mlx, e->win, x, point->y1 + ((point->y2 - point->y1) *
+					(x - point->x1)) / (point->x2 - point->x1), e->color);
+		x++;
+	}
+}
+
+void	draw_case_two(t_coord *point, t_env *e)
+{
+	int	x;
+
+	x = point->x2;
+	while (x <= point->x1)
+	{
+		mlx_pixel_put(e->mlx, e->win, x, point->y1 + ((point->y2 - point->y1) *
+					(x - point->x1)) / (point->x2 - point->x1), e->color);
+		x++;
+	}
+}
+
+void	draw_case_three(t_coord *point, t_env *e)
+{
+	int	x;
+
+	x = point->y1;
+	while (x <= point->y2)
+	{
+		mlx_pixel_put(e->mlx, e->win, point->x1 + ((point->x2 - point->x1) *
+					(x - point->y1)) / (point->y2 - point->y1), x, e->color);
+		x++;
+	}
+}
+
+void	draw_case_four(t_coord *point, t_env *e)
+{
+	int	x;
+
+	x = point->y2;
+	while (x <= point->y1)
+	{
+		mlx_pixel_put(e->mlx, e->win, point->x1 + ((point->x2 - point->x1) *
+					(x - point->y1)) / (point->y2 - point->y1), x, e->color);
+		x++;
+	}
+}
+
+void	trace_line(t_coord *point, t_env *e, int i)
+{
+	get_color(e, i);
+	if ((positive_valor(point->x2 - point->x1)) >=
+			(positive_valor(point->y2 - point->y1)))
+	{
+		if (point->x1 < point->x2)
+			draw_case_one(point, e);
+		else
+			draw_case_two(point, e);
+	}
+	else
+	{
+		if (point->y1 < point->y2)
+			draw_case_three(point, e);
+		else
+			draw_case_four(point, e);
+	}
+}

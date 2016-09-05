@@ -12,7 +12,7 @@
 
 #include "../includes/fdf.h"
 
-void		env_init(t_env *new, char *argv)
+int			env_init(t_env *new, char *argv)
 {
 	new->mlx = mlx_init();
 	new->win = mlx_new_window(new->mlx, WINX, WINY, "mlx 42");
@@ -26,7 +26,9 @@ void		env_init(t_env *new, char *argv)
 	new->inc = 1;
 	new->f_len = 0;
 	new->f_height = 0;
-	read_file(new, argv);
+	if (read_file(new, argv) == -1)
+		return (-1);
+	return (0);
 }
 
 void		my_pixel_put(t_env *e, int x, int y, int color)
@@ -90,7 +92,8 @@ int			main(int argc, char **argv)
 		ft_putendl("Usage : ./fdf fichier");
 		return (0);
 	}
-	env_init(&e, argv[1]);
+	if (env_init(&e, argv[1]) == -1)
+		return (0);
 	print_file(&e);
 	// draw_grid(&e);
 	mlx_key_hook(e.win, manage_key, &e);
