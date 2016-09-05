@@ -69,14 +69,32 @@
 int			get_color(int h)
 {
 	if (h == 0)
-		return (0xFFFFFF);
-	if (h > 5)
-		return (0xFF0000);
+		return (0x4682b4);
+	if (h >= 5)
+		return (0xff8c00);
 	if (h < 0)
-		return (0x0000FF);
+		return (0x191970);
 	if (h > 0 && h < 5)
-		return (0xFFFF00);
+		return (0xffa500);
 	return (0xFFFFFF);
+}
+
+void		draw_vert(t_env *e, int i, int j)
+{
+	e->x1 = (j * e->size) - (i * e->size - e->tab[i][j]) + e->posx;
+	e->y1 = ((j * e->size) + (i * e->size)) / e->inc - e->tab[i][j] + e->posy;
+	e->x2 = (j * e->size) - ((i + 1) * e->size - e->tab[i + 1][j]) + e->posx;
+	e->y2 = ((j * e->size) + ((i + 1) * e->size)) / e->inc - e->tab[i + 1][j] + e->posy;
+	draw_1(e, get_color(e->tab[i][j]));
+}
+
+void		draw_hori(t_env *e, int i, int j)
+{
+	e->x1 = (j * e->size) - (i * e->size - e->tab[i][j]) + e->posx;
+	e->y1 = ((j * e->size) + (i * e->size)) / e->inc - e->tab[i][j] + e->posy;
+	e->x2 = ((j + 1) * e->size) - (i * e->size - e->tab[i][j + 1]) + e->posx;
+	e->y2 = (((j + 1) * e->size) + (i * e->size)) / e->inc - e->tab[i][j + 1] + e->posy;
+	draw_1(e, get_color(e->tab[i][j]));	
 }
 
 void		draw_grid(t_env *e)
@@ -90,17 +108,8 @@ void		draw_grid(t_env *e)
 		j = -1;
 		while (++j < e->f_len - 1)
 		{
-			e->x1 = (j * e->size) - (i * e->size - e->tab[i][j]) + e->posx;
-			e->y1 = ((j * e->size) + (i * e->size)) / e->inc - e->tab[i][j] + e->posy;
-			e->x2 = ((j + 1) * e->size) - (i * e->size - e->tab[i][j + 1]) + e->posx;
-			e->y2 = (((j + 1) * e->size) + (i * e->size)) / e->inc - e->tab[i][j + 1] + e->posy;
-			draw_1(e, get_color(e->tab[i][j]));
-			
-			e->x1 = (j * e->size) - (i * e->size - e->tab[i][j]) + e->posx;
-			e->y1 = ((j * e->size) + (i * e->size)) / e->inc - e->tab[i][j] + e->posy;
-			e->x2 = (j * e->size) - ((i + 1) * e->size - e->tab[i + 1][j]) + e->posx;
-			e->y2 = ((j * e->size) + ((i + 1) * e->size)) / e->inc - e->tab[i + 1][j] + e->posy;
-			draw_1(e, get_color(e->tab[i][j]));
+			draw_hori(e, i, j);
+			draw_vert(e, i, j);
 		}
 	}
 	ft_putendl("let's draw");
