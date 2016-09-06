@@ -22,19 +22,9 @@ int			manage_key(int keycode, void *e)
 void		move_around_1(int keycode, t_env *e)
 {
 	if (keycode == 65361)
-	{
-		if (e->posx - 50 < 0)
-			e->posx = 0;
-		else
-			e->posx -= 50;
-	}
+		e->posx -= 50;
 	else if (keycode == 65362)
-	{
-		if (e->posy - 50 < 0)
-			e->posy = 0;
-		else
-			e->posy -= 50;
-	}
+		e->posy -= 50;
 	else if (keycode == 65363 || keycode == 65364)
 		move_around_2(keycode, e);
 }
@@ -42,19 +32,9 @@ void		move_around_1(int keycode, t_env *e)
 void		move_around_2(int keycode, t_env *e)
 {
 	if (keycode == 65363)
-	{
-		if (e->x2 + 50 > WINX)
-			e->posx += WINX - e->x2;
-		else
-			e->posx += 50;
-	}
+		e->posx += 50;
 	else if (keycode == 65364)
-	{
-		if (e->y2 + 50 > WINY)
-			e->posy += WINY - e->y2;
-		else
-			e->posy += 50;
-	}
+		e->posy += 50;
 }
 
 void		size(int keycode, t_env *e)

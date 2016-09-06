@@ -70,12 +70,14 @@ int			get_color(int h)
 {
 	if (h == 0)
 		return (0x4682b4);
-	if (h >= 5)
-		return (0xff8c00);
-	if (h < 0)
+	else if (h >= 15)
+		return (0xff4000);
+	else if (h < 0)
 		return (0x191970);
-	if (h > 0 && h < 5)
+	else if (h > 0 && h < 5)
 		return (0xffa500);
+	else if (h >= 5 && h < 15)
+		return (0xff8000);
 	return (0xFFFFFF);
 }
 
@@ -105,9 +107,14 @@ void		draw_grid(t_env *e)
 	i = -1;
 	while (++i < e->f_height -1)
 	{
+		ft_putstr("i = ");
+		ft_putnbr(i);
+		ft_putstr(" // ");
 		j = -1;
 		while (++j < e->f_len - 1)
 		{
+			ft_putstr("j = ");
+			ft_putnbrendl(j);
 			draw_hori(e, i, j);
 			draw_vert(e, i, j);
 		}

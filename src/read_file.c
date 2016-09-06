@@ -37,6 +37,7 @@ int			put_values(t_env *e, int i, char *line)
 	int			x;
 	int			y;
 	int			n;
+	// static int	ns = 0;
 
 	x = 0;
 	y = 0;
@@ -53,6 +54,10 @@ int			put_values(t_env *e, int i, char *line)
 		while (line[x] == ' ')
 			x++;
 	}
+	// if (ns == 0)
+	// 	ns = (int)ft_strlen(line);
+	// if (ns != (int)ft_strlen(line))
+	// 	return (-1);
 	return (0);
 }
 
