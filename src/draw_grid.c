@@ -101,25 +101,28 @@ void		draw_hori(t_env *e, int i, int j)
 
 void		draw_grid(t_env *e)
 {
-	int i;
-	int j;
+	int		i;
+	int		j;
 
 	i = -1;
-	while (++i < e->f_height -1)
+	while (++i < e->f_height - 1)
 	{
-		ft_putstr("i = ");
-		ft_putnbr(i);
-		ft_putstr(" // ");
+		if (i >= 1 && (i * 100 / (e->f_height - 1)) % 10 == 0)
+		{
+			ft_putstr("loading : ");
+			ft_putnbr(i * 100 / (e->f_height - 1));
+			ft_putstr("%\n");
+		}
 		j = -1;
 		while (++j < e->f_len - 1)
 		{
-			ft_putstr("j = ");
-			ft_putnbrendl(j);
+			// ft_putstr("j = ");
+			// ft_putnbrendl(j);
 			draw_hori(e, i, j);
 			draw_vert(e, i, j);
 		}
 	}
-	ft_putendl("let's draw");
+	ft_putendl("loading : 100% : let's draw !");
 	mlx_put_image_to_window(e->mlx, e->win, e->img, 0, 0);
 }
 
