@@ -53,6 +53,14 @@ void		divide(int keycode, t_env *e)
 		e->inc--;
 }
 
+void		height(int keycode, t_env *e)
+{
+	if (keycode == 30)
+		e->z++;
+	else
+		e->z--;
+}
+
 void		treat_keycode(int keycode, t_env *e)
 {
 	ft_putnbrendl(keycode);
@@ -64,10 +72,12 @@ void		treat_keycode(int keycode, t_env *e)
 	ft_bzero(e->data, e->sl * WINY);
 	if ((keycode >= 65361 || keycode >= 123) && (keycode <= 65364 || keycode <= 126))
 		move_around_1(keycode, e);
-	if (keycode == 65451 || keycode == 65453 || keycode == 69 || keycode == 78)
+	else if (keycode == 65451 || keycode == 65453 || keycode == 69 || keycode == 78)
 		size(keycode, e);
-	if (keycode >= 65429 && keycode <= 65437)
+	else if (keycode >= 65429 && keycode <= 65437)
 		color(keycode, e);
-	if (keycode == 46 || keycode == 44 || keycode == 47 || keycode == 43)
+	else if (keycode == 46 || keycode == 44 || keycode == 47 || keycode == 43)
 		divide(keycode, e);
+	else if (keycode == 30 || keycode == 33)
+		height(keycode, e);
 }

@@ -100,7 +100,7 @@ int			read_file(t_env *e, char *file)
 	e->tab = (int**)ft_memalloc(sizeof(int*) * 500);
 	while (get_next_line(fd, &line) > 0)
 	{
-		if (ft_strlen(line) < 1 || ft_strlen(line) > 2000)
+		if (ft_strlen(line) < 1 || ft_strlen(line) > 5000)
 		{
 			error(file, 1);
 			return (-1);

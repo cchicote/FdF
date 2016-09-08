@@ -51,6 +51,7 @@ typedef		struct	s_env
 	int		size;
 	int		color;
 	int		inc;
+	int		z;
 }					t_env;
 
 int			main(int argc, char **argv);

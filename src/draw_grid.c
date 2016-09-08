@@ -30,10 +30,10 @@ int			get_color(int h)
 void		draw_vert(t_env *e, int i, int j)
 {
 	// ft_putendl("draw_vert");
-	e->x1 = (j * e->size) - (i * e->size - e->tab[i][j] * 2) + e->posx;
-	e->y1 = ((j * e->size) + (i * e->size)) / e->inc - e->tab[i][j] * 2 + e->posy;
-	e->x2 = (j * e->size) - ((i + 1) * e->size - e->tab[i + 1][j] * 2) + e->posx;
-	e->y2 = ((j * e->size) + ((i + 1) * e->size)) / e->inc - e->tab[i + 1][j] * 2 + e->posy;
+	e->x1 = (j * e->size) - (i * e->size/* - e->tab[i][j]*/ /** e->z*/) + e->posx;
+	e->y1 = ((j * e->size) + (i * e->size)) / e->inc - e->tab[i][j] * e->z + e->posy;
+	e->x2 = (j * e->size) - ((i + 1) * e->size/* - e->tab[i + 1][j]*/ /** e->z*/) + e->posx;
+	e->y2 = ((j * e->size) + ((i + 1) * e->size)) / e->inc - e->tab[i + 1][j] * e->z + e->posy;
 	// ft_putendl("appel draw_1");
 	// printf("A(%d;%d)\tB(%d;%d)\n", e->x1, e->y1, e->x2, e->y2);
 	draw_1(e, get_color(e->tab[i][j]));
@@ -43,10 +43,10 @@ void		draw_vert(t_env *e, int i, int j)
 void		draw_hori(t_env *e, int i, int j)
 {
 	// ft_putendl("draw_hori");
-	e->x1 = (j * e->size) - (i * e->size - e->tab[i][j] * 2) + e->posx;
-	e->y1 = ((j * e->size) + (i * e->size)) / e->inc - e->tab[i][j] * 2 + e->posy;
-	e->x2 = ((j + 1) * e->size) - (i * e->size - e->tab[i][j + 1] * 2) + e->posx;
-	e->y2 = (((j + 1) * e->size) + (i * e->size)) / e->inc - e->tab[i][j + 1] * 2 + e->posy;
+	e->x1 = (j * e->size) - (i * e->size/* - e->tab[i][j]*/ /** e->z*/) + e->posx;
+	e->y1 = ((j * e->size) + (i * e->size)) / e->inc - e->tab[i][j] * e->z + e->posy;
+	e->x2 = ((j + 1) * e->size) - (i * e->size/* - e->tab[i][j + 1]*/ /** e->z*/) + e->posx;
+	e->y2 = (((j + 1) * e->size) + (i * e->size)) / e->inc - e->tab[i][j + 1] * e->z + e->posy;
 	// ft_putendl("appel draw_1");
 	// printf("A(%d;%d)\tB(%d;%d)\n", e->x1, e->y1, e->x2, e->y2);
 	draw_1(e, get_color(e->tab[i][j]));

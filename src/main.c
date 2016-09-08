@@ -26,6 +26,7 @@ int			env_init(t_env *new, char *argv)
 	new->inc = 1;
 	new->f_len = 0;
 	new->f_height = 0;
+	new->z = 1;
 	if (read_file(new, argv) == -1)
 		return (-1);
 	return (0);
