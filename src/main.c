@@ -15,7 +15,7 @@
 int			env_init(t_env *new, char *argv)
 {
 	new->mlx = mlx_init();
-	new->win = mlx_new_window(new->mlx, WINX, WINY, "mlx 42");
+	new->win = mlx_new_window(new->mlx, WINX, WINY, "fdf");
 	new->img = mlx_new_image(new->mlx, WINX, WINY);
 	new->data = mlx_get_data_addr(new->img, &(new->bpp), &(new->sl), &(new->endian));
 	new->color = 0xFFFFFF;
@@ -76,13 +76,6 @@ void		print_file(t_env *e)
 	}
 }
 
-void			clear(t_env *e)
-{
-	mlx_destroy_image(e->mlx, e->img);
-	mlx_new_image(e->mlx, WINX, WINY);
-}
-
-
 int			main(int argc, char **argv)
 {
 	t_env	e;
@@ -94,8 +87,10 @@ int			main(int argc, char **argv)
 	}
 	if (env_init(&e, argv[1]) == -1)
 		return (0);
-	print_file(&e);
+	// print_file(&e);
 	// draw_grid(&e);
+	ft_putendl("File red, start drawing now");
+	draw_grid(&e);
 	mlx_key_hook(e.win, manage_key, &e);
 	mlx_loop(e.mlx);
 	// gros_cercle_sa_mere(&e);

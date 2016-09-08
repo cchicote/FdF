@@ -15,9 +15,10 @@
 
 # include "../libft/includes/libft.h"
 # include "../minilibxLinux/mlx.h"
-# include "../src/get_next_line/get_next_line.h"
 # include <stdio.h>
 # include <math.h>
+# include <mlx.h>
+# include <fcntl.h>
 # define RED 0xFF0000
 # define BLUE 0x4169E1
 # define PURPLE 0x9932CC
@@ -60,8 +61,6 @@ int			line_len(char *line);
 int			read_file(t_env *e, char *file);
 int			put_values(t_env *e, int i, char *line);
 void		my_pixel_put(t_env *e, int x, int y, int color);
-// void		line(t_draw *d, t_env *e);
-// void		vertical(t_draw *d, t_env *e);
 void		draw_grid(t_env *e);
 void		clear(t_env *e);
 

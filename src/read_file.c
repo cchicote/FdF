@@ -96,7 +96,7 @@ int			read_file(t_env *e, char *file)
 	int		i;
 
 	i = 0;
-	fd = open(file, O_RDONLY);
+	fd = open(file, O_RDONLY, S_IREAD);
 	e->tab = (int**)ft_memalloc(sizeof(int*) * 500);
 	while (get_next_line(fd, &line) > 0)
 	{

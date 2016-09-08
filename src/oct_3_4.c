@@ -37,12 +37,12 @@ void		oct_3(t_env *e, int dx, int dy, int color)
 	f = dy;
 	dy = f * 2;
 	dx *= 2;
-	while (e->y1-- != e->y2)
+	while (e->y1++ != e->y2)
 	{
 		my_pixel_put(e, e->x1, e->y1 , color);
 		if ((f += dx) <= 0)
 		{
-			e->x1++;
+			e->x1--;
 			f += dy;
 		}
 	}

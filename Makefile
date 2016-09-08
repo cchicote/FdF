@@ -12,9 +12,11 @@
 
 NAME = fdf
 
-INCLUDES = -I./libft/ -I./minilibx/ -I./get_next_line/
+INCLUDES = -I./libft/ -I./minilibx/
 
 CFLAGS = -Wall -Werror -Wextra $(INCLUDES) #-Werror
+
+MLXOSX = -lmlx -framework OpenGL -framework AppKit
 
 LXLIBMLX = -L ./minilibxLinux/ -lmlx
 
@@ -25,9 +27,7 @@ LIBFT = -L ./libft/ -lft
 PATH_SRC = src/
 
 SRC = main.c \
-		get_next_line/get_next_line.c \
 		read_file.c \
-		draw_line.c \
 		draw_grid.c \
 		trace.c \
 		oct_1_2.c \
@@ -48,6 +48,10 @@ minilibx_linux:
 gcc: libft minilibx_linux $(SRCO)
 	@clang $(CFLAGS) -o $(NAME) $(SRCO) $(LIBFT) $(LXLIBMLX) $(MLXLINUX) -lm
 	@echo "\033[32;40mCOMPILATION : OK\033[0;0m"
+
+osx: libft $(SRCO)
+	@gcc $(CFLAGS) -o $(NAME) $(SRCO) $(LIBFT) $(MLXOSX)
+	@echo "\033[32;40m\ncompilation OK\n\033[0;0m"
 
 .PHONY: clean fclean minilibx_linux libft
 

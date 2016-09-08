@@ -21,54 +21,53 @@ int			manage_key(int keycode, void *e)
 
 void		move_around_1(int keycode, t_env *e)
 {
-	if (keycode == 65361)
+	if (keycode == 65361 || keycode == 124)
 		e->posx -= 50;
-	else if (keycode == 65362)
+	else if (keycode == 65362 || keycode == 125)
 		e->posy -= 50;
-	else if (keycode == 65363 || keycode == 65364)
+	else if (keycode == 65363 || keycode == 65364 || keycode == 123 || keycode == 126)
 		move_around_2(keycode, e);
 }
 
 void		move_around_2(int keycode, t_env *e)
 {
-	if (keycode == 65363)
+	if (keycode == 65363 || keycode == 123)
 		e->posx += 50;
-	else if (keycode == 65364)
+	else if (keycode == 65364 || keycode == 126)
 		e->posy += 50;
 }
 
 void		size(int keycode, t_env *e)
 {
-	if (keycode == 65451)
+	if (keycode == 65451 || keycode == 69)
 		e->size++;
-	else if (keycode == 65453 && e->size > 2)
+	else if ((keycode == 65453 || keycode == 78) && e->size >= 2)
 		e->size--;
-	ft_putnbrendl(e->size);
 }
 
 void		divide(int keycode, t_env *e)
 {
-	if (keycode == 46)
+	if (keycode == 46 || keycode == 47)
 		e->inc++;
-	else if (keycode == 44 && e->inc > 1)
+	else if ((keycode == 44 || keycode == 43) && e->inc > 1)
 		e->inc--;
 }
 
 void		treat_keycode(int keycode, t_env *e)
 {
 	ft_putnbrendl(keycode);
-	if (keycode == 65307)
+	if (keycode == 65307 || keycode == 53)
 	{
 		mlx_destroy_window(e->mlx, e->win);
 		exit(0);
 	}
-	clear(e);
-	if (keycode >= 65361 && keycode <= 65364)
+	ft_bzero(e->data, e->sl * WINY);
+	if ((keycode >= 65361 || keycode >= 123) && (keycode <= 65364 || keycode <= 126))
 		move_around_1(keycode, e);
-	if (keycode == 65451 || keycode == 65453)
+	if (keycode == 65451 || keycode == 65453 || keycode == 69 || keycode == 78)
 		size(keycode, e);
 	if (keycode >= 65429 && keycode <= 65437)
 		color(keycode, e);
-	if (keycode == 46 || keycode == 44)
+	if (keycode == 46 || keycode == 44 || keycode == 47 || keycode == 43)
 		divide(keycode, e);
 }
