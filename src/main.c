@@ -6,11 +6,12 @@
 /*   By: cchicote <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/25 19:34:52 by cchicote          #+#    #+#             */
-/*   Updated: 2016/02/25 19:40:10 by cchicote         ###   ########.fr       */
+/*   Updated: 2016/09/08 19:18:46 by cchicote         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
+#include "../minilibx_macos/X.h"
 
 int			env_init(t_env *new, char *argv)
 {
@@ -80,7 +81,8 @@ int			main(int argc, char **argv)
 		return (0);
 	ft_putendl("File red, start drawing now");
 	draw_grid(&e);
-	mlx_key_hook(e.win, manage_key, &e);
+	mlx_hook(e.win, KeyPress, KeyPressMask, manage_key, &e);
+	//mlx_key_hook(e.win, manage_key, &e);
 	mlx_loop(e.mlx);
 	return (0);
 }

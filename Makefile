@@ -40,6 +40,8 @@ SRC = main.c \
 
 SRCO = $(patsubst %.c, %.o,$(addprefix $(PATH_SRC), $(SRC)))
 
+all: osx
+
 libft:
 	@make -C libft
 
@@ -60,7 +62,8 @@ clean:
 	@make -C libft/ clean
 	@/bin/rm -f $(SRCO)
 
-fcleanlinux: clean
+fclean: clean
 	@make -C libft/ fclean
-	@make -C minilibxLinux/ clean
 	@/bin/rm -f $(NAME)
+
+re: fclean all
