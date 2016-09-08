@@ -21,7 +21,7 @@ void		oct_8(t_env *e, int dx, int dy, int color)
 	dy *= 2;
 	while (e->x1++ != e->x2)
 	{
-		my_pixel_put(e, e->x1, e->y1 , color);
+		my_pixel_put(e, e->x1, e->y1, color);
 		if ((f += dy) < 0)
 		{
 			e->y1--;
@@ -31,7 +31,7 @@ void		oct_8(t_env *e, int dx, int dy, int color)
 }
 
 void		oct_7(t_env *e, int dx, int dy, int color)
-{	
+{
 	int		f;
 
 	f = dy;
@@ -39,7 +39,7 @@ void		oct_7(t_env *e, int dx, int dy, int color)
 	dx *= 2;
 	while (e->y1-- != e->y2)
 	{
-		my_pixel_put(e, e->x1, e->y1 , color);
+		my_pixel_put(e, e->x1, e->y1, color);
 		if ((f += dx) > 0)
 		{
 			e->x1++;

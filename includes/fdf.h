@@ -27,78 +27,94 @@
 # define WINX 1000
 # define WINY 1000
 
-typedef		struct	s_env
+typedef	struct	s_env
 {
-	void	*win;
-	void	*mlx;
-	void	*img;
-	char	*data;
-	int		bpp;
-	int		sl;
-	int		endian;
-	int		key;
-	int		posv;
-	int		posh;
-	int		x1;
-	int		y1;
-	int		x2;
-	int		y2;
-	int		posx;
-	int		posy;
-	int		**tab;
-	int		f_len;
-	int		f_height;
-	int		size;
-	int		color;
-	int		inc;
-	int		z;
-}					t_env;
-
-int			main(int argc, char **argv);
-int			env_init(t_env *new, char *argv);
-int			my_key_funct(int keycode, t_env *e);
-int			my_mouse_funct(int mousecode, int x, int y, t_env *fdf);
-int			line_len(char *line);
-int			read_file(t_env *e, char *file);
-int			put_values(t_env *e, int i, char *line);
-void		my_pixel_put(t_env *e, int x, int y, int color);
-void		draw_grid(t_env *e);
-void		clear(t_env *e);
+	void		*win;
+	void		*mlx;
+	void		*img;
+	char		*data;
+	int			bpp;
+	int			sl;
+	int			endian;
+	int			key;
+	int			posv;
+	int			posh;
+	int			x1;
+	int			y1;
+	int			x2;
+	int			y2;
+	int			posx;
+	int			posy;
+	int			**tab;
+	int			f_len;
+	int			f_height;
+	int			size;
+	int			color;
+	int			inc;
+	int			z;
+}				t_env;
 
 /*
-** INPUTS
+** MAIN.C
 */
 
-int			manage_key(int keycode, void *e);
-void		treat_keycode(int keycode, t_env *e);
-void		move_around_1(int keycode, t_env *e);
-void		move_around_2(int keycode, t_env *e);
-void		size(int keycode, t_env *e);
-void		color(int keycode, t_env *e);
-void		divide(int keycode, t_env *e);
-
-
+int				env_init(t_env *new, char *argv);
+void			my_pixel_put(t_env *e, int x, int y, int color);
+void			print_file(t_env *e);
+int				main(int argc, char **argv);
 
 /*
-** DRAW
+** READ_FILE.C
 */
 
-void		draw_1(t_env *e, int color);
-void		draw_2(t_env *e, int dx, int dy, int color);
-void		draw_3(t_env *e, int dx, int dy, int color);
-void		draw_4(t_env *e, int dy, int color);
+int				line_len(char *line);
+int				put_values(t_env *e, int i, char *line);
+void			error(char *filename, int errnum);
+int				check_line(char *line, char *file);
+int				read_file(t_env *e, char *file);
 
 /*
-** OCTANTS
+** INPUTS / INPUT_COLOR.C / KEYCODE.C / KEYCODE_2.C
 */
 
-void		oct_1(t_env *e, int dx, int dy, int color);
-void		oct_2(t_env *e, int dx, int dy, int color);
-void		oct_3(t_env *e, int dx, int dy, int color);
-void		oct_4(t_env *e, int dx, int dy, int color);
-void		oct_5(t_env *e, int dx, int dy, int color);
-void		oct_6(t_env *e, int dx, int dy, int color);
-void		oct_7(t_env *e, int dx, int dy, int color);
-void		oct_8(t_env *e, int dx, int dy, int color);
+int				manage_key(int keycode, void *e);
+void			treat_keycode(int keycode, t_env *e);
+void			move_around_1(int keycode, t_env *e);
+void			move_around_2(int keycode, t_env *e);
+void			divide(int keycode, t_env *e);
+void			height(int keycode, t_env *e);
+void			color(int keycode, t_env *e);
+void			size(int keycode, t_env *e);
+
+/*
+** DRAW_GRID.C
+*/
+
+int				get_color(int h);
+void			draw_vert(t_env *e, int i, int j);
+void			draw_hori(t_env *e, int i, int j);
+void			draw_grid(t_env *e);
+
+/*
+** DRAW / TRACE.C
+*/
+
+void			draw_1(t_env *e, int color);
+void			draw_2(t_env *e, int dx, int dy, int color);
+void			draw_3(t_env *e, int dx, int dy, int color);
+void			draw_4(t_env *e, int dy, int color);
+
+/*
+** OCTANTS / OCT_1-8.C
+*/
+
+void			oct_1(t_env *e, int dx, int dy, int color);
+void			oct_2(t_env *e, int dx, int dy, int color);
+void			oct_3(t_env *e, int dx, int dy, int color);
+void			oct_4(t_env *e, int dx, int dy, int color);
+void			oct_5(t_env *e, int dx, int dy, int color);
+void			oct_6(t_env *e, int dx, int dy, int color);
+void			oct_7(t_env *e, int dx, int dy, int color);
+void			oct_8(t_env *e, int dx, int dy, int color);
 
 #endif

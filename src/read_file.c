@@ -37,27 +37,22 @@ int			put_values(t_env *e, int i, char *line)
 	int			x;
 	int			y;
 	int			n;
-	// static int	ns = 0;
 
 	x = 0;
 	y = 0;
 	n = 0;
 	while (line[x] != '\0')
 	{
-		while(line[x + n] == '-' || ft_isalnum(line[x + n]) == 1)
+		while (line[x + n] == '-' || ft_isalnum(line[x + n]) == 1)
 			n++;
 		e->tab[i][y] = ft_atoi(ft_strsub(line, x, n));
 		n = 0;
 		y++;
-		while ((line[x] <= '9' && line[x] >= '0') || line[x] == '-') // C'est ici que ca marchait pas pour les nombres negatifs
+		while ((line[x] <= '9' && line[x] >= '0') || line[x] == '-')
 			x++;
 		while (line[x] == ' ')
 			x++;
 	}
-	// if (ns == 0)
-	// 	ns = (int)ft_strlen(line);
-	// if (ns != (int)ft_strlen(line))
-	// 	return (-1);
 	return (0);
 }
 
@@ -66,11 +61,15 @@ void		error(char *filename, int errnum)
 	ft_putstr("Error: ");
 	ft_putstr(filename);
 	if (errnum == 1)
-		ft_putendl(" : this file is too long or too short, please modify its size.");
+	{
+		ft_putstr(" : this file is too long or too short");
+		ft_putendl(", please modify its size.");
+	}
 	else if (errnum == 2)
-		ft_putendl(" : there is an invalid character in this file, please choose a valid file");
-	else if (errnum == 3)
-		ft_putendl(" : bad format");
+	{
+		ft_putstr(" : there is an invalid character in this file");
+		ft_putendl(", please choose a valid file");
+	}
 }
 
 int			check_line(char *line, char *file)
@@ -108,11 +107,7 @@ int			read_file(t_env *e, char *file)
 		if (check_line(line, file) != 0)
 			return (-1);
 		e->tab[i] = (int*)ft_memalloc(sizeof(int) * (line_len(line) + 1));
-		if (put_values(e, i, line))
-		{
-			error(file, 3);
-			return (-1);
-		}
+		put_values(e, i, line);
 		e->f_len = line_len(line);
 		i++;
 		e->f_height++;
