@@ -24,6 +24,7 @@ void		treat_keycode(int keycode, t_env *e)
 	ft_putnbrendl(keycode);
 	if (keycode == 65307 || keycode == 53)
 	{
+		ft_putendl("Goodbye");
 		mlx_destroy_window(e->mlx, e->win);
 		exit(0);
 	}

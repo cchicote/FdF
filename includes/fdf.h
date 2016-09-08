@@ -37,8 +37,6 @@ typedef	struct	s_env
 	int			sl;
 	int			endian;
 	int			key;
-	int			posv;
-	int			posh;
 	int			x1;
 	int			y1;
 	int			x2;
